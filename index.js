@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const database = require("./src/config/database");
+const productsModel = require("./src/models/products");
+const categoriesModel = require("./src/models/categories");
 
 const app = express();
 const port = 4606;
