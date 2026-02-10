@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const productsController = require("../controllers/products");
-const productsMiddlewares = require("../middlewares/products");
+const productsMiddleware = require("../middlewares/products");
 
-router.post("/products", productsMiddlewares.validadeCreateProduct, productsController.createProduct)
+router.post("/products", productsMiddleware.validadeCreateProduct, productsController.createProduct)
 
 module.exports = router;
