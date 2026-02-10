@@ -26,5 +26,4 @@ categoriesModel.query(sqlInsert)
 
 module.exports = {
     categoriesModel
-
 };
