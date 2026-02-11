@@ -8,6 +8,16 @@ function validadeCreateProduct(req, res, next){
     next()
 }
 
+function validadeDeleteProduct(req, res, next){
+    const { id } = req.params
+
+    if(!id){
+        return res.status(400).send({ error: "O id é obrigatório!"})
+    }
+
+    next()
+}
 module.exports = {
-    validadeCreateProduct
+    validadeCreateProduct,
+    validadeDeleteProduct
 }
