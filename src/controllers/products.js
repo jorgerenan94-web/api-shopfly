@@ -53,9 +53,22 @@ async function updateProduct(req, res) {
     }
     
 }
+
+async function getNameProducts(req, res) {
+    const { name } = req.params
+
+    try {
+        const result = await productsModel.query(`SELECT * FROM products WHERE name ILIKE $1;`, [`%${name}%`])
+        res.status(200).send(result.rows)
+    } catch (error) {
+        console.error(`Erro ao encontrar produtos:`, error);
+        res.status(500).send({ error: `Erro ao encontrar produtos`})
+    }
+}
 module.exports = {
     createProduct,
     getAllProducts,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getNameProducts
 }
