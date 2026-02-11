@@ -39,8 +39,23 @@ async function deleteProduct(req, res) {
     }
     
 }
+
+async function updateProduct(req, res) {
+    const { id } = req.params
+    const { name, price, category_id } = req.body
+    
+    try {
+        const result = await productsModel.query(`UPDATE products SET name = $1, price = $2, category_id = $3 WHERE id = $4 RETURNING *;`, [name, price, category_id, id])
+        res.status(200).send(result.rows[0])
+    } catch (error) {
+        console.error(`Erro ao atualizar produto:`, error)
+        res.status(500).send({ error: `Erro ao atualizar produto`})
+    }
+    
+}
 module.exports = {
     createProduct,
     getAllProducts,
-    deleteProduct
+    deleteProduct,
+    updateProduct
 }
