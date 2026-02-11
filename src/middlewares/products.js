@@ -17,7 +17,19 @@ function validadeDeleteProduct(req, res, next){
 
     next()
 }
+
+function validadeUpdateProduct(req, res, next){
+    const { id } = req.params
+    const {name, price, category_id} = req.body
+
+    if(!name || !price || !category_id || !id){
+        return res.status(400).send({ error: "Nome, preço, categoria_id e id são obrigatórios."})
+    }
+
+    next()
+}
 module.exports = {
     validadeCreateProduct,
-    validadeDeleteProduct
+    validadeDeleteProduct,
+    validadeUpdateProduct
 }
