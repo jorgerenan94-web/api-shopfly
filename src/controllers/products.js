@@ -12,6 +12,21 @@ async function createProduct(req, res) {
     }
 }
 
+async function getAllProducts(req, res){
+    try {
+        const result = await productsModel.query(`SELECT * FROM products ORDER BY id DESC;`)
+
+        if(result.rows.length === 0){
+            return res.status(400).send({ meessage: `Nenhum produto encontrado`})
+        }
+
+        res.status(200).send(result.rows)
+    } catch (error) {
+        console.error(`Erro ao buscar produtos:`, error);
+        res.status(500).send({ error: `Erro ao buscar produtos`})
+    }
+}
 module.exports = {
-    createProduct
+    createProduct,
+    getAllProducts
 }
