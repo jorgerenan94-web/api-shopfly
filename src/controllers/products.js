@@ -31,7 +31,7 @@ async function deleteProduct(req, res) {
     const { id } = req.params
 
     try {
-        const result = await productsModel.query(`DELETE FROM products WHERE id = $1 RETURNING *;`)
+        const result = await productsModel.query(`DELETE FROM products WHERE id = $1 RETURNING *;`, [id])
         res.status(200).send(result.rows[0])
     } catch (error) {
         console.error(`Erro ao deletar produto:`, error)
