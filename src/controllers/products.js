@@ -26,7 +26,21 @@ async function getAllProducts(req, res){
         res.status(500).send({ error: `Erro ao buscar produtos`})
     }
 }
+
+async function deleteProduct(req, res) {
+    const { id } = req.params
+
+    try {
+        const result = await productsModel.query(`DELETE FROM products WHERE id = $1 RETURNING *;`)
+        res.status(200).send(result.rows[0])
+    } catch (error) {
+        console.error(`Erro ao deletar produto:`, error)
+        res.status(500).send({ error: `Erro ao deletar produto`})
+    }
+    
+}
 module.exports = {
     createProduct,
-    getAllProducts
+    getAllProducts,
+    deleteProduct
 }
